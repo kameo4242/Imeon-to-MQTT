@@ -75,7 +75,6 @@ def poll_imeon_data():
 
       payload["Timestamp"]           = str(time.ctime())
       payload["Battery_status"]      = str(values1['bat_status'])
-      #payload["Battery_state"]      = str(values2['state_battery']['message'])
       payload["Battery_activity"]    = str(values2['state_battery']['class'])
       payload["Battery_current"]     = str(values3['battery-current'])
       payload["Battery_tension"]     = str(values3['battery-tension'])
@@ -103,10 +102,7 @@ def poll_imeon_data():
 
   except Exception as err:
       print("Imeon is eating glue again... (" + str(err)+")")
-      #time.sleep(10)
-      #continue
       raise SystemExit
-    #break
 
 def run():
     global payload
