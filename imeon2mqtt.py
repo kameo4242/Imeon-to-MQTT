@@ -10,6 +10,7 @@ LOGIN_URL       = "http://[insert your Imeon's IP here]/login"
 DATA_URL1       = "http://[insert your Imeon's IP here]/battery-status"
 DATA_URL2       = "http://[insert your Imeon's IP here]/imeon-status"
 DATA_URL3       = "http://[insert your Imeon's IP here]/data-lithium"
+DATA_URL4       = "http://[insert your Imeon's IP here]/scan"
 EMAIL           = "installer@local" # default Imeon login
 PASSWORD        = "Installer_P4SS"  # default Imeon pass
 broker          = '[insert your MQTT Broker's IP here]'
@@ -63,15 +64,18 @@ def poll_imeon_data():
       data1   = session.get(DATA_URL1, timeout=2)
       data2   = session.get(DATA_URL2, timeout=2)
       data3   = session.get(DATA_URL3, timeout=2)
+      data4   = session.get(DATA_URL3, timeout=2)
 
       resp.raise_for_status()
       data1.raise_for_status()
       data2.raise_for_status()
       data3.raise_for_status()
+      data4.raise_for_status()
 
       values1 = data1.json()
       values2 = data2.json()
       values3 = data3.json()
+      values4 = data4.json()
 
       payload["Timestamp"]           = str(time.ctime())
       payload["Battery_status"]      = str(values1['bat_status'])
